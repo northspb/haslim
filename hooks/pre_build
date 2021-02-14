@@ -1,5 +1,10 @@
 #!/bin/bash
 
-# Register qemu-*-static for all supported processors except the 
-# current one, but also remove all registered binfmt_misc before
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
+export DOCKER_CLI_EXPERIMENTAL=enabled
+export DOCKER_BUILDKIT=1
+docker buildx create \
+	--name builder \
+	--driver docker-container \
+	--platform linux/amd64,linux/arm64 \
+	--use
+docker buildx inspect --bootstrap
