@@ -1,0 +1,2 @@
+# haslim
+Home Assistant Slim
